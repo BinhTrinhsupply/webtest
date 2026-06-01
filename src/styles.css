@@ -1,0 +1,165 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: "Inter", "SF Pro Display", system-ui, -apple-system, sans-serif;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 14px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+  --radius-3xl: 28px;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --shadow-soft: 0 1px 2px oklch(0 0 0 / 0.04), 0 4px 16px oklch(0 0 0 / 0.04);
+  --shadow-lift: 0 12px 32px -8px oklch(0 0 0 / 0.10), 0 4px 12px -4px oklch(0 0 0 / 0.06);
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-brand-glow: var(--brand-glow);
+}
+
+:root {
+  --radius: 14px;
+  --background: oklch(0.995 0 0);
+  --foreground: oklch(0.18 0.005 240);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.18 0.005 240);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.18 0.005 240);
+  --primary: oklch(0.62 0.18 145);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.97 0.02 150);
+  --secondary-foreground: oklch(0.18 0.005 240);
+  --muted: oklch(0.97 0.01 150);
+  --muted-foreground: oklch(0.48 0.008 240);
+  --accent: oklch(0.95 0.04 150);
+  --accent-foreground: oklch(0.25 0.08 150);
+  --destructive: oklch(0.55 0.2 27);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.93 0.01 150);
+  --input: oklch(0.93 0.01 150);
+  --ring: oklch(0.62 0.18 145);
+  --brand: oklch(0.62 0.18 145);
+  --brand-foreground: oklch(0.99 0 0);
+  --brand-glow: oklch(0.78 0.22 145);
+}
+
+.dark {
+  --background: oklch(0.13 0.005 240);
+  --foreground: oklch(0.98 0 0);
+  --card: oklch(0.18 0.005 240);
+  --card-foreground: oklch(0.98 0 0);
+  --popover: oklch(0.18 0.005 240);
+  --popover-foreground: oklch(0.98 0 0);
+  --primary: oklch(0.98 0 0);
+  --primary-foreground: oklch(0.13 0.005 240);
+  --secondary: oklch(0.22 0.005 240);
+  --secondary-foreground: oklch(0.98 0 0);
+  --muted: oklch(0.22 0.005 240);
+  --muted-foreground: oklch(0.65 0.008 240);
+  --accent: oklch(0.22 0.005 240);
+  --accent-foreground: oklch(0.98 0 0);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.65 0.008 240);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    font-feature-settings: "ss01", "cv11";
+  }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.4s ease-out both;
+}
+
+.card-lift {
+  transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease;
+}
+.card-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-lift);
+}
+
+/* Green glow button — luminous backlight effect */
+.btn-glow {
+  position: relative;
+  background-color: var(--brand);
+  color: var(--brand-foreground);
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--brand) 60%, transparent),
+    0 8px 24px -6px color-mix(in oklab, var(--brand) 55%, transparent),
+    0 0 32px -4px color-mix(in oklab, var(--brand-glow) 60%, transparent);
+  transition: box-shadow 0.35s ease, transform 0.25s ease, background-color 0.25s ease;
+}
+.btn-glow:hover {
+  background-color: color-mix(in oklab, var(--brand) 92%, white);
+  transform: translateY(-1px);
+  box-shadow:
+    0 0 0 1px color-mix(in oklab, var(--brand) 70%, transparent),
+    0 14px 36px -8px color-mix(in oklab, var(--brand) 65%, transparent),
+    0 0 56px -2px color-mix(in oklab, var(--brand-glow) 80%, transparent);
+}
+.btn-glow::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: radial-gradient(60% 100% at 50% 0%, color-mix(in oklab, var(--brand-glow) 55%, transparent), transparent 70%);
+  filter: blur(10px);
+  opacity: 0.6;
+  z-index: -1;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+.btn-glow:hover::before {
+  opacity: 1;
+}
+
+.btn-outline-brand {
+  border: 1px solid color-mix(in oklab, var(--brand) 40%, transparent);
+  background-color: var(--background);
+  color: var(--foreground);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, color 0.25s ease;
+}
+.btn-outline-brand:hover {
+  border-color: var(--brand);
+  color: var(--brand);
+  box-shadow: 0 0 24px -6px color-mix(in oklab, var(--brand-glow) 55%, transparent);
+}
